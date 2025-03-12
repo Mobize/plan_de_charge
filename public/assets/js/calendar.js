@@ -16,6 +16,127 @@ window.onload = () => {
     // BUG
     // changement d'année (vue 2 mois : decembre janvier) a corriger
 
+
+    const toggleButton = document.getElementById("toggle");
+    const toggleText = document.getElementById("dark-mode-toggle");
+    let tableResponsive = document.getElementById('firstMonthTable');
+    let tableResponsiveNextMonth = document.getElementById('secondMonthTable');
+    const projectSelector = document.getElementById('project-selector');
+    const selectedMonthContainer = document.getElementById('selectedMonth');
+    const startVacationInput = document.getElementById('startVacation');
+    const endVacationInput = document.getElementById('endVacation');
+    const typeVacationInput = document.getElementById('vacationTypeSelect');
+    const secondMonthNameButton = document.getElementById('secondMonthName');
+    const buttonNext = document.getElementById('next');
+    const buttonPrevious = document.getElementById('previous');
+    const modalContent = document.getElementById("modal-content");
+    const modalHeader = document.getElementById("modal-header");
+    const modalConfirmContent = document.getElementById("modalConfirm-content");
+    const toggle = document.getElementById("toggle");
+    const logo = document.getElementById("logo");
+
+    // toggle.addEventListener("change", () => {
+    //     document.body.classList.toggle("dark-mode");
+    // });
+
+    // Vérifie si le mode sombre est activé dans le stockage local
+    if (localStorage.getItem("darkMode") === "enabled") {
+        logo.src = logo.dataset.logoDark;
+        toggle.checked = true;
+        document.body.classList.add("dark-mode");
+        toggleText.innerText = "Mode sombre";
+        toggleText.style.marginRight = "165px";
+        tableResponsive.classList.add("dark-mode-container");
+        tableResponsiveNextMonth.classList.add("dark-mode-container");
+        document.querySelectorAll(".vacationTypeContainer").forEach(element => {
+            element.classList.add("dark-mode-container");
+        });
+        projectSelector.classList.add("dark-mode-container");
+        selectedMonthContainer.classList.add("dark-mode-container");
+        secondMonthNameButton.classList.add("dark-mode-container");
+        buttonNext.classList.add("dark-mode-container");
+        buttonPrevious.classList.add("dark-mode-container");
+        startVacationInput.classList.add("dark-mode-container");
+        endVacationInput.classList.add("dark-mode-container");
+        typeVacationInput.classList.add("dark-mode-container");
+        modalConfirmContent.classList.add("dark-mode-modal-confirm");
+        modalContent.classList.add("dark-mode-modal");
+        modalHeader.classList.add("dark-mode-modal-header");
+        
+    } else {
+        logo.src = logo.dataset.logoLight;
+        toggleText.innerText = "Activer le mode mode sombre";
+        toggleText.style.marginRight = "280px";
+        tableResponsive.classList.remove("dark-mode-container");
+        tableResponsiveNextMonth.classList.remove("dark-mode-container");
+        document.querySelectorAll(".vacationTypeContainer").forEach(element => {
+            element.classList.remove("dark-mode-container");
+        });
+        projectSelector.classList.remove("dark-mode-container");
+        selectedMonthContainer.classList.remove("dark-mode-container");
+        secondMonthNameButton.classList.remove("dark-mode-container");
+        buttonNext.classList.remove("dark-mode-container");
+        buttonPrevious.classList.remove("dark-mode-container");
+        modalContent.classList.remove("dark-mode-modal");
+        modalHeader.classList.remove("dark-mode-modal-header");
+        startVacationInput.classList.remove("dark-mode-container");
+        endVacationInput.classList.remove("dark-mode-container");
+        typeVacationInput.classList.remove("dark-mode-container");
+        modalConfirmContent.classList.remove("dark-mode-modal-confirm");
+    }
+
+    // Ajoute un event listener pour basculer entre les modes
+    toggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        
+        // Sauvegarde la préférence de l'utilisateur
+        if (document.body.classList.contains("dark-mode")) {
+            logo.src = logo.dataset.logoDark;
+            localStorage.setItem("darkMode", "enabled");
+            toggleText.innerText = "Mode sombre";
+            toggleText.style.marginRight = "165px";
+            tableResponsive.classList.add("dark-mode-container");
+            tableResponsiveNextMonth.classList.add("dark-mode-container");
+            document.querySelectorAll(".vacationTypeContainer").forEach(element => {
+                element.classList.add("dark-mode-container");
+            });
+            projectSelector.classList.add("dark-mode-container");
+            selectedMonthContainer.classList.add("dark-mode-container");
+            secondMonthNameButton.classList.add("dark-mode-container");
+            buttonNext.classList.add("dark-mode-container");
+            buttonPrevious.classList.add("dark-mode-container");
+            modalContent.classList.add("dark-mode-modal");
+            modalHeader.classList.add("dark-mode-modal-header");
+            startVacationInput.classList.add("dark-mode-container");
+            endVacationInput.classList.add("dark-mode-container");
+            typeVacationInput.classList.add("dark-mode-container");
+            modalConfirmContent.classList.add("dark-mode-modal-confirm");
+            
+        } else {
+            logo.src = logo.dataset.logoLight;
+            localStorage.setItem("darkMode", "disabled");
+            toggleText.innerText = "Activer le mode mode sombre";
+            toggleText.style.marginRight = "280px";
+            tableResponsive.classList.remove("dark-mode-container");
+            tableResponsiveNextMonth.classList.remove("dark-mode-container");
+            document.querySelectorAll(".vacationTypeContainer").forEach(element => {
+                element.classList.remove("dark-mode-container");
+            });
+            projectSelector.classList.remove("dark-mode-container");
+            selectedMonthContainer.classList.remove("dark-mode-container");
+            secondMonthNameButton.classList.remove("dark-mode-container");
+            buttonNext.classList.remove("dark-mode-container");
+            buttonPrevious.classList.remove("dark-mode-container");
+            modalContent.classList.remove("dark-mode-modal");
+            modalHeader.classList.remove("dark-mode-modal-header");
+            startVacationInput.classList.remove("dark-mode-container");
+            endVacationInput.classList.remove("dark-mode-container");
+            typeVacationInput.classList.remove("dark-mode-container");
+            modalConfirmContent.classList.remove("dark-mode-modal-confirm");
+        }
+    });
+
+
     let date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth();
@@ -255,7 +376,7 @@ window.onload = () => {
                 tBody.innerHTML += `<tr class="semaine" 
                                     data-employeeId="${employee.id}" 
                                     data-employeeFullName="${employee.fullname}">
-                                    <th scope="row" class="name-col"><span class="fa-icon"><i class="fa-solid fa-circle-user fa-xl" style="color: #0006b847;"></i></span><span>${employee.fullname}</span></th>
+                                    <th scope="row" class="name-col"><span class="fa-icon"><i class="fa-solid fa-custom fa-circle-user fa-xl" style="color: #0006b847;"></i></span><span>${employee.fullname}</span></th>
                                     <th scope="row" class="employee_id" id="employee_id_${employee.id}" style="text-align:center"></th>
                                     </tr>`
             })
@@ -588,7 +709,7 @@ window.onload = () => {
                 updateVacations = false
                 vacationId = ""
                 modalTitle.innerText = `Ajout de congés pour : ${employeeFullname}`
-                modalTitle.style.color = 'black'                
+                // modalTitle.style.color = 'black'                
             }
         })
 
@@ -692,7 +813,7 @@ window.onload = () => {
                 if(updateVacations) {
                     showSuccessNotification('Congés modifiés');
                 } else {
-                    showSuccessNotification('Congés soumis');
+                    showSuccessNotification('Congés ajoutés');
                 }
             }, 1000);
         }
@@ -813,16 +934,19 @@ window.onload = () => {
         const loader = document.getElementById("loader");
         const content = document.getElementById("content");
         const legend = document.getElementById("legend");
+        const loaderContainer = document.getElementById("toggle-container");
 
         loader.style.display = "block";
         content.style.display = "none";
         legend.style.display = "none";
+        loaderContainer.style.display = "none";
         
         await displayEmployees(year, monthToNumber, selectedMonthLength, nextMonthLengthValue)  
 
         loader.style.display = "none";
         content.style.display = "flex";
         legend.style.display = "block";
+        loaderContainer.style.display = "flex";
         // document.getElementById("firstMonthName").innerText = cld[cld.length - 1].month
 
         let today = new Date().toLocaleDateString('fr-ca')
@@ -840,7 +964,6 @@ window.onload = () => {
             
             Cases = document.getElementsByClassName('case_row_'+ index);
             gret = document.getElementsByClassName('day');
-            console.log(gret.length)
 
             for (let i = 0; i < gret.length; i++) {
                 // gret[i].innerHTML = '<div></div>';
@@ -874,8 +997,16 @@ window.onload = () => {
                     Cases[i + cld[cld.length -1].dayStart].setAttribute('data-month', month+1 )
                     Cases[i + cld[cld.length -1].dayStart].setAttribute('data-stringDay', dayStringFR)
 
-                    if(dayTimestamp === todayTimestamp) {// Aujourd'hui
-                        Cases[i + cld[cld.length -1].dayStart].style.backgroundColor = "#ebebf963"
+                    if(dayTimestamp === todayTimestamp) {// Aujourd'hui                        
+                        if(index == 0) {
+                            console.log('index')
+                            Cases[i + cld[cld.length -1].dayStart].style.backgroundColor = "rgb(96 100 195)"
+                            Cases[i + cld[cld.length -1].dayStart].style.color = "white"
+                            Cases[i + cld[cld.length -1].dayStart].style.borderRadius = "25px"
+                        }
+                        
+
+                        //.classList.add("dark-mode-container");
                     }
 
                     if(index === 0) {
@@ -934,6 +1065,8 @@ window.onload = () => {
                                         // Cases[i].children[0].style.backgroundColor = vacationColor
                                         // console.log(Cases[i + cld[cld.length -1].dayStart])
                                         Cases[i + cld[cld.length -1].dayStart].style.backgroundColor=vacationColor
+                                        Cases[i + cld[cld.length -1].dayStart].classList.add('vacation-shadow');
+                                        
                                         Cases[i + cld[cld.length -1].dayStart].style.color="white"
                                         Cases[i + cld[cld.length -1].dayStart].innerText = i + 1
                                         Cases[i + cld[cld.length -1].dayStart].setAttribute('data-vacations', true )
@@ -1094,6 +1227,7 @@ window.onload = () => {
                                             Cases[i + cld2[cld2.length -1].dayStart].classList.add('vacation-day-end')
                                         }
                                             Cases[i + cld2[cld2.length -1].dayStart].style.backgroundColor=vacationColor
+                                            Cases[i + cld2[cld2.length -1].dayStart].classList.add('vacation-shadow');
                                             Cases[i + cld2[cld2.length -1].dayStart].style.color="white"
                                             Cases[i + cld2[cld2.length -1].dayStart].innerText = i + 1
                                             Cases[i + cld2[cld2.length -1].dayStart].setAttribute('data-vacations', true )

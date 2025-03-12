@@ -1,5 +1,25 @@
 body {
-    background-color: #ebebf963 !important;
+    /* background-color: #ebebf963 !important; */
+    background: linear-gradient(135deg, #667eea38, #764ba27a);    
+    height: 100vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    font-family: "Montserrat", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 14px !important;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+#dark-mode-toggle {
+    margin-right: 300px;
 }
 
 .container-fluid.calendar-container{
@@ -14,6 +34,10 @@ body {
 .modal-header {
     border-top-right-radius: 10px !important;
     border-top-left-radius: 10px !important;
+    background: linear-gradient(135deg, #667eea38, #764ba27a);   
+}
+.modal-title {
+    /* color: white !important */
 }
 
 .modal-content {
@@ -28,14 +52,30 @@ body {
     height: 25px;
     text-align: center;
     margin: auto;
-    background: #8182a7;
+    background: #6064c3;
     color: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* #projet-selector {
+    font-size: 14px;
+    height: 40px;
+} */
+
+.fa-custom {
+    font-weight: 500;
+}
+
+.fa-brands:before, .fa-regular:before, .fa-solid:before, .fa:before, .fab:before, .far:before, .fas:before {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 30px;
 }
 
 .table-responsive {
     background-color: white;
     border-radius: 10px;
     border: 1px solid #00000026;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .table>:not(:last-child)>:last-child>* {
@@ -82,6 +122,10 @@ a:hover {
     color :white !important
 }
 
+.vacation-shadow {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
 .btn-previous, .btn-next {
     border: 1px solid #ced4da;
     background-color: white;
@@ -90,10 +134,29 @@ a:hover {
     border-radius: 50%;
     width: 40px;
     height: 40px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-container {
+    background-color: rgba(255, 254, 254, 0.66) !important;
+}
+
+.dark-mode-modal {
+    background-color: #2a2042 !important;
+}
+.dark-mode-modal-confirm {
+    background-color: #56457e !important;
+}
+
+.dark-mode-modal-header {
+    background-color: #1d1f26 !important;
 }
 
 #selectedMonth, #project-selector {
     text-align: center;
+    font-size: 14px;
+    height: 40px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .btn-previous {
@@ -122,9 +185,19 @@ input#selectedMonth {
 }
 
 #secondMonthName {
-    font-size: 20px;
+    font-size: 14px;
     position: relative;
-    top: -35px;
+    top: -41px;
+    width: 220px;
+    margin: auto;
+    border: 1px solid #ced4da;
+    margin-top: -10px;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    height: 40px;
+    line-height: 2.8;
+    color: black;
 }
 
 #secondMonthDisplay {
@@ -134,13 +207,16 @@ input#selectedMonth {
 .legendContainer {
     width: 75%;
     margin-top: 30px;
+    color: black;
 }
 
 .vacationTypeContainer {
     display: flex;
-    border: 1px solid;
+    border: 1px solid #ced4da;
     margin: 5px;
     border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .vacationType {
@@ -157,6 +233,18 @@ input#selectedMonth {
 
 tr.semaine.header, tr.semaine2.header {
     /* background-color: #e3e3e3; */
+}
+
+.form-control, .btn {
+    font-size: 14px !important;
+}
+
+.modal-title {
+    font-size: 18px;
+}
+
+.modal-body {
+    margin-top: 10px !important;
 }
 
 th.headWeek{
@@ -245,29 +333,56 @@ td.day:hover, td.day2:hover {
 }
 
 .half-day-morning:after {
-    content: '';
-    width: 77%;
+    content: '!';
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 13px;
+    height: 13px;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    border-radius: 50%;
+    font-size: 10px;
+    position: absolute;
+    right: 60%;
+    top: 1px;
+    /* width: 77%;
     height: 25%;
     border-style: solid;
     border-width: 0px 0px 10px 0px;
-    border-color: #f5f0f0 transparent #ffffffc9 transparent;
+    border-color: #f5f0f0 transparent #02020270 transparent;
     right: 26%;
-    top: -5px;
+    top: -3px;
     position: absolute;
-    border-radius: 35px;
+    border-radius: 35px; */
 }
 
 .half-day-afternoon:after {
-    content: '';
+    content: '!';
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 13px;
+    height: 13px;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    border-radius: 50%;
+    font-size: 10px;
+    position: absolute;
+    right: 2%;
+    top: 24px;
+    /* content: '';
     width: 77%;
     height: 25%;
     border-style: solid;
     border-width: 0px 0px 10px 0px;
-    border-color: #f5f0f0 transparent #ffffffc9 transparent;
+    border-color: #f5f0f0 transparent #02020270 transparent;
     right: -8%;
-    top: 32px;
+    top: 31px;
     position: absolute;
-    border-radius: 35px;
+    border-radius: 35px; */
 }
 /* HTML: <div class="loader"></div> */
 .loader {
@@ -276,7 +391,7 @@ td.day:hover, td.day2:hover {
     margin: auto;
     border-radius: 50%;
     display: inline-block;
-    border-top: 4px solid #0e0e0e;
+    border-top: 4px solid white;
     border-right: 4px solid transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
@@ -293,7 +408,8 @@ td.day:hover, td.day2:hover {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border-left: 4px solid #b8baeb;;
+    /* border-left: 4px solid #6064c3; */
+    border-left: 4px solid #6064c3;
     border-bottom: 4px solid transparent;
     animation: rotation 0.5s linear infinite reverse;
   }
@@ -305,6 +421,16 @@ td.day:hover, td.day2:hover {
       transform: rotate(360deg);
     }
   } 
+
+  #logo-container {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+  }
+
+  #config {
+    margin-left: 130px;
+  }
 /* .loader {
     width: 60px;
     aspect-ratio: 2;
@@ -485,6 +611,8 @@ th.jour {
     margin-bottom: 10px;
     font-size: 14px;
     animation: fadeIn 0.3s ease-out, fadeOut 0.5s ease-out 3s forwards;
+    margin-top: 39px;
+    margin-right: 15px;
 }
 
 /* Animation d'apparition */
@@ -515,4 +643,132 @@ th.jour {
     width: 1.75rem;
     height: 1.75rem;
   }
+
+ .btn-mt-20 {
+    margin-top: 23px !important;
+ }
+  /* From Uiverse.io by mrhyddenn */ 
+.uiverse {
+    height: 40px !important;
+    position: relative;
+    background: #ffffff;
+    color: #000;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+
+  /* Conteneur du switch */
+.switch {
+    position: absolute;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+/* Cacher la case à cocher */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-container {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style du slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+    border: 1px solid #f1f1f1;
+}
+
+/* Cercle du bouton */
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Quand le bouton est activé */
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider::before {
+    transform: translateX(24px);
+}
+
   
+  /* .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background: #ffffff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .uiverse:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  } */
+  
+  /* svg:hover span,
+  svg:hover .tooltip {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .uiverse:hover,
+  .uiverse:hover .tooltip,
+  .uiverse:hover .tooltip::before {
+    background: linear-gradient(320deg, rgb(3, 77, 146), rgb(0, 60, 255));
+    color: #ffffff;
+  } */

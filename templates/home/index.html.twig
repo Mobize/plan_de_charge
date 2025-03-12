@@ -3,11 +3,21 @@
 {% block title %}Plan de charge{% endblock %}
 
 {% block body %}
+{% if app.user %}
+    <p>Bienvenue, {{ app.user.email }} !</p>
+{% else %}
+    <p>Vous n'êtes pas connecté.</p>
+{% endif %}
 
     {# <button onclick="showSuccessNotification()">Afficher la notification</button> #}
     <div id="notification-container"></div>
-    <div class="container-fluid calendar-container">
-        <div class="row">
+    <div class="container-fluid calendar-container" style="margin-top:15px">
+    <div id="logo-container">
+        <img id="logo" src="{{ asset('assets/images/time-off.png') }}" alt="Mon Logo" width="150"
+            data-logo-light="{{ asset('assets/images/time-off.png') }}"
+            data-logo-dark="{{ asset('assets/images/time-off-blanc.png') }}">
+    </div>
+        <div class="row" id="config">
             {# Selection Projet #}
             <div class="col-sm-2 projectSelector" data-projects="{{projects_json}}" data-selectedProject="{{selectedProject.id}}">
                 <div class="cldT">Selection du projet</div>
@@ -29,14 +39,14 @@
                 </section>
             </div>
             {# Selection vue mensuelle/bimensuelle #}
-            <div class="col-sm-3">
-                <button id="switchViewButton" class="btn btn-white twoMonthButton">Vue mensuelle</button>
-                <button id="adminButton" class="btn btn-white adminButton"><a class="adminLink" href="/admin" target="blank">Administration</a></button>
+            <div class="col-sm-3 btn-mt-20">
+                <button id="switchViewButton" class="uiverse btn btn-white twoMonthButton">Vue mensuelle</button>
+                <button id="adminButton" class="uiverse btn btn-white adminButton"><a class="adminLink" href="/admin" target="blank">Administration</a></button>
             </div>
         </div>
         <div class="row" id="content" style="display:none;">
             <div class="col-sm-7" id="firstMonthDisplay">
-                <div class="table-responsive firstMonthTable">
+                <div class="table-responsive firstMonthTable" id="firstMonthTable">
                     <table class="table">
                         <thead>
                             <tr id="table_days">
@@ -49,7 +59,7 @@
             </div>
             <div class="col-sm-5" id="secondMonthDisplay">
                 <div id="secondMonthName"></div>
-                <div class="table-responsive secondMonthTable">
+                <div class="table-responsive secondMonthTable" id="secondMonthTable">
                     <table class="table">
                         <thead>
                             <tr id="table_days2">
@@ -63,13 +73,17 @@
         </div>
 
         <div class="row" id="legend" style="display:none;">
-            <div class="col-sm-2">
+            <div class="col-md-6">
                 <div class="legendContainer">
+                <div class="row">
                     {% for type in vacationType %}
-                    <div class="vacationTypeContainer">
-                        <div class="vacationColorLegend" style="background-color:{{type.color}}"></div><div class="vacationType">{{type.name}}</div> 
-                    </div>
+                        <div class="col-md-4">
+                            <div class="vacationTypeContainer">
+                                <div class="vacationColorLegend" style="background-color:{{type.color}}"></div><div class="vacationType">{{type.name}}</div> 
+                            </div>
+                        </div>
                     {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,8 +91,8 @@
     <!-- Modal -->
     <div class="modal fade" id="vacationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg ">
-            <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-content" id="modal-content">
+            <div class="modal-header" id="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -134,9 +148,9 @@
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary" id="submit_vacation">Valider</button>
-                <button type="button" class="btn btn-danger delete-vacation" id="delete_vacation">Supprimer</button>
+                <button type="button" class="uiverse btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="uiverse btn btn-primary" id="submit_vacation">Valider</button>
+                <button type="button" class="uiverse btn btn-danger delete-vacation" id="delete_vacation">Supprimer</button>
             </div>
             </div>
         </div>
@@ -144,20 +158,32 @@
 
     <!-- Seconde modale (confirmation de suppression) -->
     <div id="confirmModal" class="modalConfirm">
-        <div class="modalConfirm-content">
+        <div class="modalConfirm-content" id="modalConfirm-content">
             <p>Confirmer la suppression ?</p>
             <div class="modal-buttons">
-                <button id="cancel-delete" class="btn btn-secondary">Annuler</button>
-                <button id="confirm-delete" class="btn btn-danger btn-custom">Oui</button>
+                <button id="cancel-delete" class="uiverse btn btn-secondary">Annuler</button>
+                <button id="confirm-delete" class="uiverse btn btn-danger btn-custom">Oui</button>
             </div>
         </div>
     </div>
 
-    <button id="clear-cache-btn" class="btn btn-success" style="position: absolute;
-    right: 50px;bottom:50px;">Vider le cache</button>
+    {# <button id="dark-mode-toggle" style="position: absolute;right: 68px;bottom: 115px;">🌙 Mode Sombre</button> #}
+    <div class="toggle-container" id="toggle-container" style="display:none;">
+        <span id="dark-mode-toggle">Mode Sombre</span>
+        <label class="switch">
+            <input type="checkbox" id="toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <button id="clear-cache-btn" class="uiverse btn btn-success" style="position: absolute;right: 50px;bottom:50px;">Vider le cache</button>
+        
+    {% endif %}
+
     <!-- Loader animé -->
     <div id="loader" class="loader" >
         <div class="spinner" style="display:none;"></div>
-        {# <p>Vidage du cache en cours...</p> #}
     </div>
+    
 {% endblock %}
