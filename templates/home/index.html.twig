@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plan de charge{% endblock %}
+
+{% block body %}
+
+    {# <button onclick="showSuccessNotification()">Afficher la notification</button> #}
+    <div id="notification-container"></div>
+    <div class="container-fluid calendar-container">
+        <div class="row">
+            {# Selection Projet #}
+            <div class="col-sm-2 projectSelector" data-projects="{{projects_json}}" data-selectedProject="{{selectedProject.id}}">
+                <div class="cldT">Selection du projet</div>
+                    <form>
+                        <select name="projectId" id="project-selector" class="form-control form-select" value="{{selectedProject.id}}">
+                        </select>
+                    </form>
+            </div>
+            {# Selection mois #}
+            <div class="col-sm-3">
+                <section id="cld">
+                    <div class="cldT">Sélection du mois</div>
+                    <section id="enteteCld">
+                    {# <section id="avantEtApres"> #}
+                        <button id="previous" class="btn-previous">&#8249;</button>
+                        <input type="month" class="form-control selectMonth" id="selectedMonth" name="selectedMonth" min="2018-03" value="2018-05" />
+                        <button id="next" class="btn-next">&#8250;</button>
+                    {# </section> #}
+                </section>
+            </div>
+            {# Selection vue mensuelle/bimensuelle #}
+            <div class="col-sm-3">
+                <button id="switchViewButton" class="btn btn-white twoMonthButton">Vue mensuelle</button>
+                <button id="adminButton" class="btn btn-white adminButton"><a class="adminLink" href="/admin" target="blank">Administration</a></button>
+            </div>
+        </div>
+        <div class="row" id="content" style="display:none;">
+            <div class="col-sm-7" id="firstMonthDisplay">
+                <div class="table-responsive firstMonthTable">
+                    <table class="table">
+                        <thead>
+                            <tr id="table_days">
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-5" id="secondMonthDisplay">
+                <div id="secondMonthName"></div>
+                <div class="table-responsive secondMonthTable">
+                    <table class="table">
+                        <thead>
+                            <tr id="table_days2">
+                            </tr>
+                        </thead>
+                        <tbody id="2months">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="legend" style="display:none;">
+            <div class="col-sm-2">
+                <div class="legendContainer">
+                    {% for type in vacationType %}
+                    <div class="vacationTypeContainer">
+                        <div class="vacationColorLegend" style="background-color:{{type.color}}"></div><div class="vacationType">{{type.name}}</div> 
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="vacationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="date-container">
+                <div class="form-inline row flex-center" >
+                    <div class="form-group col-md-5">
+                        <label for="startVacation" class="mb-2">Date de début :</label>
+                        <input class="form-control" type="date" required  id="startVacation" name="vacation-start" value="" min="2020-01-01" max="2030-12-31" />
+                        <div class="mt-2">Congés précedents : <span id="previousVacations"></span></div>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="endVacation" class="labelEndVacations mb-2">Date de fin :</label>
+                        <input class="form-control" type="date" required  id="endVacation" name="vacation-end" value="" min="2020-01-01" max="2030-12-31" />
+                        <div class="mt-2">Congés suivants : <span id="nextVacations"></span></div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6 offset-md-1" style="padding-left:2px;" id="vacation-submission-date">Congés soumis le : <span id="submission-date-text"></span></div>
+                <div class="row">
+                    <div class="form-group col-md-5 mt-3 offset-md-1">
+                        <label for="vacationType" class="mb-2">Type d'absence</label>
+                        <select name="vacationTypeSelect" required  id="vacationTypeSelect" class="form-control form-select"> 
+                            {% for type in vacationType %}
+                                <option value = {{type.id}}>
+                                {{ type.name }}
+                                </option>
+                            {% endfor %}
+                        </select> 
+                    </div>
+                </div>
+                <div class="form-group col-md-3 mt-3 offset-md-1" style="padding-left:2px;">
+                    <div class="form-check d-none" id="isHalfDay">
+                        <input class="form-check-input" type="checkbox" value="" id="halfDayCheckbox"> 
+                        <label class="form-check-label" for="halfDayCheckbox">
+                            Demi-journée
+                        </label>
+                    </div>
+                    <div id="halfDayContainer" class="d-none halfDayContainer">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="halfMorning">
+                            <label class="form-check-label" for="halfMorning">
+                                Matin
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="halfAfternoon">
+                            <label class="form-check-label" for="halfAfternoon">
+                                Après-midi
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="submit_vacation">Valider</button>
+                <button type="button" class="btn btn-danger delete-vacation" id="delete_vacation">Supprimer</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seconde modale (confirmation de suppression) -->
+    <div id="confirmModal" class="modalConfirm">
+        <div class="modalConfirm-content">
+            <p>Confirmer la suppression ?</p>
+            <div class="modal-buttons">
+                <button id="cancel-delete" class="btn btn-secondary">Annuler</button>
+                <button id="confirm-delete" class="btn btn-danger btn-custom">Oui</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="clear-cache-btn" class="btn btn-success" style="position: absolute;
+    right: 50px;bottom:50px;">Vider le cache</button>
+    <!-- Loader animé -->
+    <div id="loader" class="loader" >
+        <div class="spinner" style="display:none;"></div>
+        {# <p>Vidage du cache en cours...</p> #}
+    </div>
+{% endblock %}

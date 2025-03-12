@@ -1,0 +1,518 @@
+body {
+    background-color: #ebebf963 !important;
+}
+
+.container-fluid.calendar-container{
+    padding: 30px;
+}
+
+.fa-icon {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+.modal-header {
+    border-top-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+}
+
+.modal-content {
+    border-radius: 10px !important;
+}
+
+.vacationCount {
+    border: 1px solid #00000024;
+    border-radius: 36px;
+    display: block;
+    width: 40px;
+    height: 25px;
+    text-align: center;
+    margin: auto;
+    background: #8182a7;
+    color: white;
+}
+
+.table-responsive {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #00000026;
+}
+
+.table>:not(:last-child)>:last-child>* {
+    border-bottom-color: transparent !important;
+}
+/* #project-selector {
+    width: 50%;
+} */
+
+th.jour {
+    padding-bottom: 10px !important;
+}
+
+#enteteCld {
+    display: flex;
+    justify-content: center;
+}
+
+.cldT {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.firstMonthTable{
+    margin-top: 30px;
+    padding-top: 10px
+}
+
+.secondMonthTable {
+    padding-top: 10px
+}
+
+.btn-white {
+    color: white !important;
+    background-color: #6064c3 !important;
+    border-color: #ced4da !important;
+}
+
+.btn-white:hover {
+    background-color: #363689 !important;
+}
+a:hover {
+    color :white !important
+}
+
+.btn-previous, .btn-next {
+    border: 1px solid #ced4da;
+    background-color: white;
+    border-color: #ced4da;
+    color: black;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+#selectedMonth, #project-selector {
+    text-align: center;
+}
+
+.btn-previous {
+    margin-right: 20px;
+}
+
+.btn-next {
+    margin-left: 20px;
+}
+
+input#selectedMonth {
+    width: 50%;
+}
+
+.twoMonthButton, .adminButton {
+    margin-top: 35px;
+}
+
+.twoMonthButton {
+    margin-right: 25px;
+}
+
+.adminLink {
+    text-decoration: none;
+    color: white;
+}
+
+#secondMonthName {
+    font-size: 20px;
+    position: relative;
+    top: -35px;
+}
+
+#secondMonthDisplay {
+    text-align: center;
+}
+
+.legendContainer {
+    width: 75%;
+    margin-top: 30px;
+}
+
+.vacationTypeContainer {
+    display: flex;
+    border: 1px solid;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.vacationType {
+    margin-left: 15px
+}
+
+.vacationColorLegend {
+    width: 24px;
+    height: 24px;
+    margin: auto 0 auto 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+tr.semaine.header, tr.semaine2.header {
+    /* background-color: #e3e3e3; */
+}
+
+th.headWeek{
+    border-bottom: 2px solid transparent;
+}
+
+td.text_center {
+    text-align: center;
+}
+
+td.day, td.day2 {
+    cursor:pointer;
+    width: 48px;
+    font-size: 14px;
+    height: 48px;
+    vertical-align: middle;
+}
+
+td.day:hover, td.day2:hover {
+    color: black !important
+}
+
+table {
+    /* table-layout:fixed; */
+    /* width: inherit !important; */
+  }
+  td, th {
+    height:40px !important;
+ 
+  }
+
+
+
+th.jour {
+    text-align: center;
+}
+
+td.day:hover, td.day2:hover {
+    border: 1px solid grey;
+    background-color: grey;
+}
+
+.vacation-day-start{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.vacation-day-end {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+.passed-days {
+  /* position: relative; */
+  /* width: 300px;
+  height: 70px;
+  background: black; */
+  /* border-radius: 12px; */
+  /* overflow: hidden; */
+  background: black;
+}
+/* .passed-days:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 0;
+    border-color: transparent #F44336 transparent transparent;
+    right: 0;
+    top: 0;
+    position: absolute;
+} */
+
+.delete-vacation {
+    padding-top: 24px;
+}
+
+.halfDayContainer {
+    margin-left: 20px;
+}
+
+.half-day-morning, .half-day-afternoon {
+  position: relative;
+  overflow: hidden;
+}
+
+.half-day-morning:after {
+    content: '';
+    width: 77%;
+    height: 25%;
+    border-style: solid;
+    border-width: 0px 0px 10px 0px;
+    border-color: #f5f0f0 transparent #ffffffc9 transparent;
+    right: 26%;
+    top: -5px;
+    position: absolute;
+    border-radius: 35px;
+}
+
+.half-day-afternoon:after {
+    content: '';
+    width: 77%;
+    height: 25%;
+    border-style: solid;
+    border-width: 0px 0px 10px 0px;
+    border-color: #f5f0f0 transparent #ffffffc9 transparent;
+    right: -8%;
+    top: 32px;
+    position: absolute;
+    border-radius: 35px;
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 4px solid #0e0e0e;
+    border-right: 4px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+  }
+  .loader::after {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border-left: 4px solid #b8baeb;;
+    border-bottom: 4px solid transparent;
+    animation: rotation 0.5s linear infinite reverse;
+  }
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+/* .loader {
+    width: 60px;
+    aspect-ratio: 2;
+    margin: auto;
+    width: 85px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+    background: 
+      var(--_g) 0%   50%,
+      var(--_g) 50%  50%,
+      var(--_g) 100% 50%;
+    background-size: calc(100%/3) 50%;
+    animation: l3 1s infinite linear;
+  }
+  @keyframes l3 {
+      20%{background-position:0%   0%, 50%  50%,100%  50%}
+      40%{background-position:0% 100%, 50%   0%,100%  50%}
+      60%{background-position:0%  50%, 50% 100%,100%   0%}
+      80%{background-position:0%  50%, 50%  50%,100% 100%}
+  } */
+/* .loader {
+    margin: auto;
+    width: 85px;
+    height: 50px;
+    --g1:conic-gradient(from  90deg at left   3px top   3px,#0000 90deg,#8f0e0e 0);
+    --g2:conic-gradient(from -90deg at bottom 3px right 3px,#0000 90deg,#a72d2d 0);
+    background:var(--g1),var(--g1),var(--g1), var(--g2),var(--g2),var(--g2);
+    background-position: left,center,right;
+    background-repeat: no-repeat;
+    animation: l9 1s infinite;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+  }
+  @keyframes l9 {
+    0%   {background-size:25px 50% ,25px 50% ,25px 50%}
+    25%  {background-size:25px 100%,25px 50% ,25px 50%}
+    50%  {background-size:25px 50% ,25px 100%,25px 50%}
+    75%  {background-size:25px 50% ,25px 50% ,25px 100%}
+    100% {background-size:25px 50% ,25px 50% ,25px 50%}
+  } */
+
+/* .loader {
+    margin: auto;
+    height: 80px;
+    aspect-ratio: 1;
+    padding: 10px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    mask: conic-gradient(#000 0 0) content-box exclude,conic-gradient(#000 0 0);
+    filter: blur(12px);
+    position: fixed;
+    top: 35%;
+    left: 50%;
+  }
+  .loader:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(#0000 0 5%, #007e4b, #f7f6f2 20% 50%);
+    animation: l2 1.5s linear infinite;
+  }
+  @keyframes l2 {
+    to {rotate: 1turn}
+  } */
+
+
+/* Vue bimensuelle */
+
+/* table.table {
+    table-layout: fixed;
+    width: 50%;
+} */
+
+th.headWeek {
+    width: 110px;
+}
+
+th {
+    font-size: 14px;
+    font-weight: 400;
+    vertical-align: middle;
+}
+
+th.jour {
+    padding: 0 !important;
+}
+
+/* td.day {
+    font-size: 14px;
+    height: 60px;
+    vertical-align: middle;
+} */
+
+.table>:not(caption)>*>* {
+    padding: 0 !important;
+}
+
+.modal-header {
+    background-color: #e7e7e7;
+}
+
+.modal-header .btn-close {
+    position: absolute;
+    right: 1rem;
+}
+
+.modal-title {
+    margin: auto;
+}
+
+.btn-custom {
+    width: 81px;
+    margin-left: 25px;
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.name-col {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Conteneur des modales */
+.modalConfirm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* display: flex; */
+    justify-content: center;
+    align-items: flex-start; /* Place la modale plus haut */
+    padding-top: 27vh; /* Ajuste la hauteur de la modale */
+}
+
+/* Contenu des modales */
+.modalConfirm-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    max-height: 80vh; /* Empêche la modale de dépasser */
+    overflow-y: auto;
+    text-align: center;
+}
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    min-height: 60vh; 
+}
+
+/* Conteneur des notifications */
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Style de la notification */
+.notification {
+    background-color: #4CAF50; /* Vert succès */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease-out, fadeOut 0.5s ease-out 3s forwards;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation de disparition */
+@keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+.squishy {
+    position: relative;
+    font-size: 1.875rem;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 250ms;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .squishy i {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  
